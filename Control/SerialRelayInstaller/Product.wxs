@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="SerialRelay" Language="1033" Version="1.0.0.0" Manufacturer="AJK Services" UpgradeCode="04896049-f185-46c9-bd02-a19cfd7a34bb">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" InstallPrivileges="elevated" />
+        
+		<MajorUpgrade DowngradeErrorMessage="A newer version of Serial Relay is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <PropertyRef Id="NETFRAMEWORK45"/>
+    <Condition Message='This setup requires the .NET Framework 4.5 or higher installed.'>
+      <![CDATA[Installed OR NETFRAMEWORK45]]>
+    </Condition>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder" Name ="ProgramFilesDir">
+        <Directory Id='AJKServices' Name='AJK Services'>
+          <Directory Id="INSTALLFOLDER" Name="SerialRelay">
+            <Component Id='MainExecutable' Guid='98b696a1-e3dc-4688-bb1c-b7c03cf676fe'>
+              <File Id='SerialRelay' Name='SerialRelay.exe' DiskId='1' Source='../SerialRelay/bin/Debug/SerialRelay.exe' KeyPath='yes'>
+                <Shortcut Id="desktopSerialRelay10" Directory="DesktopFolder" WorkingDirectory="INSTALLFOLDER" Name="SerialRelay" Icon="SerialRelay.ico" IconIndex="0" Advertise="yes" />
+              </File>
+              <File Id='SerialRelay.csv' Name='SerialRelay.csv' DiskId='1' Source='../SerialRelay/bin/Debug/SerialRelay.csv' />
+              <File Id='SerialRelay.exe.config' Name='SerialRelay.exe.config' DiskId='1' Source='../SerialRelay/bin/Debug/SerialRelay.exe.config' />
+              <File Id='LICENSE' Name='LICENSE' DiskId='1' Source='../../LICENSE' />
+            </Component>
+          </Directory>
+        </Directory>
+      </Directory>
+      <Directory Id="DesktopFolder" Name="Desktop" />
+    </Directory>
+
+    <Feature Id='Complete' Level='1'>
+      <ComponentRef Id='MainExecutable' />
+    </Feature>
+
+    <Icon Id="SerialRelay.ico" SourceFile="SerialRelay.ico" />
+    <Property Id="ARPPRODUCTICON" Value="SerialRelay.ico" />
+  </Product>
+</Wix>
