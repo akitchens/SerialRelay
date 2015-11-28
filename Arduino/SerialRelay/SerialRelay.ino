@@ -21,9 +21,9 @@
 #define RELAY_5 6
 #define RELAY_6 7
 #define RELAY_7 8
-#define RELAY_8 13
+#define RELAY_8 9
 
-#define ACTIVE = LOW
+#define ACTIVE LOW
 
 void setup() {
   // Initialize pins. Set all pins inactive.
@@ -34,8 +34,8 @@ void setup() {
 
   // Initialize serial communication.
   Serial.begin(9600);   
-  Serial.WriteLine("SerialRelay V1.0");
-  Serial.WriteLine("Ready ...");	
+  Serial.write("SerialRelay V1.0");
+  Serial.write("Ready ...");	
 }
 
 void TurnOffPins() {
@@ -47,38 +47,38 @@ void TurnOffPins() {
 void loop() {
   // read the sensor:
   if (Serial.available() > 0) {
-    String inByte = Serial.readString();
+    int inByte = Serial.read();
       
     switch (inByte) { 
-      case 'A':  
+      case 'a':  
         TurnOffPins();
         digitalWrite(RELAY_1, ACTIVE);
 	break;
-      case 'B':
+      case 'b':
         TurnOffPins();
         digitalWrite(RELAY_2, ACTIVE);
 	break; 
-      case 'C':
+      case 'c':
         TurnOffPins();
         digitalWrite(RELAY_3, ACTIVE);
 	break;
-      case 'D':
+      case 'd':
         TurnOffPins();
         digitalWrite(RELAY_4, ACTIVE);
 	break;
-      case 'E':
+      case 'e':
         TurnOffPins();
         digitalWrite(RELAY_5, ACTIVE);
 	break; 
-      case 'F':
+      case 'f':
         TurnOffPins();
         digitalWrite(RELAY_6, ACTIVE);
 	break; 
-      case 'G':
+      case 'g':
         TurnOffPins();
         digitalWrite(RELAY_7, ACTIVE);
 	break;  
-      case 'H':
+      case 'h':
         TurnOffPins();
         digitalWrite(RELAY_8, ACTIVE);
 	break;             
